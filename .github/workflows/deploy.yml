@@ -1,0 +1,50 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.52.86.150.228 }}
+          username: ${{ secrets.ubuntu }}
+          key: ${{ secrets.-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAuqnPAyaA13KdEH0KUYh76f1pVzWZiYdnu8Ydn2vxKQQFgbie
+JKzfoFlrtiX+9rj+b0zhyMQpSbabUT+7yYiVi9DpNe5iThwtv7WLG9p3gfULzlA8
+bzJcL8bb2cfInZ3XWmyqj0aAwOBoTc2dAR4lcdMwr2p4TWFc48Cwye5RCOHwQDsM
+OtkQ0a/fWFeXtKL3Aby1LIQsf/t+CgtrngjGvASqooNAsRoSQDJ+MVJVU/arddlM
+JaA4+sc1gPiPzfUCl7wuARNIfWlxJHxYn2s0giNWGuiURpSoP69TYHSVTO1kfZSk
+FEYib5KCeLx0Rr1YQNoon/qsZlOJuFTY2Xu+hwIDAQABAoIBAHZfKP/+csYt0Jyc
+Lub1fl8sbJj5TJyCWa4iPLbUZOJ1wmg5A1COsGGnUz73aXBccD10q9n9S5GLU4N6
+v0NWcj9wA/RHb9/Izto77jODnzWyiAIVr710WjGSEelRYE9TwTV+o8qoEw49QOfV
+9DK5Q1Wjb8RN6GxpydZEY9gqYQkX6HpPOq9k6kzpOvFaBRg0zbCJHmJF3qRL1rD7
+1Mqm5lkvKfqcfvx0i2k1xH+aavYqm5elCrq9EuP5Hunu7PD6FFfueCFKTmiskS2s
+p/LxC/G4pD2Nx07MASz562m11601wgVYkaWqeC/F2EJrnghUf1R1oMgjjPwyBLRh
+28d+34ECgYEA7LBcusZUxTNFKZA/yiushsrkbyjW/ElTuOTdi+scqBwYoDbqbyM7
+rV55LdLgN0bkmk11PTUoZyrvW6MzUEnIi2RWIZa+u4rMYMMYB5jYDgi54gSDm5y1
+mHYugLp+zHPUmpw+17S6NtUOQuC3mh8l/TZA7juCFIHMFWSKnG4agpkCgYEAyeSU
+UidM5XQ2hoIJxKa3B8LNVyRrl+5AHqdn4045bk6UQb+sxDGlxjhMX8KJT8Tknynd
+g649Sq9LfTRdkuVB96gSbE/m9TOxDzu1GRjzDWyFpzM1rwOJg9TE0wUoYnp/oweo
+WG6/hxyS4kJmH9viaImoB04F15xkXOF5OMO4Hh8CgYEAktk1HziwHY2aypfRzAhe
+yV6WbhVDlVGVXTC59/aOWAreiICp4PxWKVFlE7YzIHiemtGV/Ly/bYro6M0PqC+u
++jTtb3eMrOUHur0wan49BjAJzB4K3YBT9tzUK1AKHaV78dUg9EoQArcbWwj7QOc0
+da60iFppcXm6ekdf7IAveHkCgYBG12IEAa5FxSVsxSxQSH9oxb3vmeP3B66QEwWt
+CMG2JvR2rZ8dqJ4Wk6KY51XvG5NtFe+YSQdQsXm3kSxUYwVmtR7hyper6ltykOzW
+xZ5jU3UCWkG4C3GxRHNb6C9nfrxSpFk5zoJ+ElSn98yF2U30iHjhN0ttgH7m6Gb0
+uBhe2QKBgQDMidGdR4qiXRhmjyzBvSLgG5jHXJI4SWaNrJ5lzZv+RS6mUNKjx0hi
+ryrs/H92KbfzoP1f1Naq7u49wmrAsQyOUm5oS51DkqHN4u3IUH7rya7o870QjVvQ
+49Y4zjjHtuqSaxfv8Mi86Zs09XVLkpesxJ70F7wEbbRaKC2ImFe4uA==
+-----END RSA PRIVATE KEY----- }}
+          script: |
+            cd /home/ubuntu/japanese-course-app
+            git pull origin main
+            ./deploy/deploy.sh
